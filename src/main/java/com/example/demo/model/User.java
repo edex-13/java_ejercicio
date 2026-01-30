@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import java.util.List;
 
-import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties.Apiversion.Use;
 
 public class User {
   private String ID ;

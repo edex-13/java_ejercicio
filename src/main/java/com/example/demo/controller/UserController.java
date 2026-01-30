@@ -17,6 +17,9 @@ import com.example.demo.dto.SuccessResponse;
 import com.example.demo.dto.SuccessResponseNotData;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.service.UserService;
+
+import jakarta.validation.Valid;
+
 import com.example.demo.model.User;
 
 @RestController
@@ -51,7 +54,7 @@ public class UserController {
   }
 
   @PostMapping("/")
-  public ResponseEntity<SuccessResponse<User>> createUser(@RequestBody UserDTO request){
+  public ResponseEntity<SuccessResponse<User>> createUser(@Valid @RequestBody UserDTO request){
 
     User user = userService.create(request.name() , request.email() , request.edad() , request.movies());
 
@@ -63,7 +66,7 @@ public class UserController {
   }
 
   @PutMapping("/{index}")
-  public ResponseEntity<SuccessResponse<User>> updateUser(@PathVariable String index , @RequestBody UserDTO request){
+  public ResponseEntity<SuccessResponse<User>> updateUser(@PathVariable String index ,@Valid @RequestBody UserDTO request){
 
     User user =  userService.update(index , request.name() , request.edad() , request.email() ) ;
 
