@@ -66,7 +66,7 @@ public class UserController {
   }
 
   @PutMapping("/{index}")
-  public ResponseEntity<SuccessResponse<User>> updateUser(@PathVariable String index ,@Valid @RequestBody UserDTO request){
+  public ResponseEntity<SuccessResponse<User>> updateUser(@PathVariable Long index ,@Valid @RequestBody UserDTO request){
 
     User user =  userService.update(index , request.name() , request.edad() , request.email() ) ;
 
@@ -78,8 +78,8 @@ public class UserController {
   }
 
   @DeleteMapping("/{index}")
-  public ResponseEntity<SuccessResponseNotData> delateUser(@PathVariable int index){
-    userService.delate(index);
+  public ResponseEntity<SuccessResponseNotData> delateUser(@PathVariable Long id){
+    userService.delate(id);
 
     SuccessResponseNotData response = 
       new SuccessResponseNotData(HttpStatus.NO_CONTENT.value(), "usuario eliminado con exito");
