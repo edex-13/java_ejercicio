@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.SuccessResponse;
 import com.example.demo.dto.SuccessResponseNotData;
-import com.example.demo.dto.UserDTO;
-import com.example.demo.dto.UserPrivateDTO;
+import com.example.demo.dto.User.UserDTO;
+import com.example.demo.dto.User.UserPrivateDTO;
 import com.example.demo.service.UserService;
 
 import jakarta.validation.Valid;

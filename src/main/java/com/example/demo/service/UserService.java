@@ -7,8 +7,8 @@ import java.util.UUID;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties.Apiversion.Use;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.MoviePrivateDTO;
-import com.example.demo.dto.UserPrivateDTO;
+import com.example.demo.dto.Movie.MoviePrivateDTO;
+import com.example.demo.dto.User.UserPrivateDTO;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.MovieRepository;

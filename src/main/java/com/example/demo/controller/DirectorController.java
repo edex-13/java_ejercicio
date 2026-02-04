@@ -17,11 +17,13 @@ import com.example.demo.dto.SuccessResponse;
 import com.example.demo.dto.SuccessResponseNotData;
 import com.example.demo.dto.Movie.MovieDTO;
 import com.example.demo.dto.Movie.MoviePrivateDTO;
+import com.example.demo.dto.User.UserDTO;
 import com.example.demo.service.MovieService;
 
 import jakarta.validation.Valid;
 
-
+import com.example.demo.model.Movie;
+import com.example.demo.model.User;
 
 @RestController
 @RequestMapping("/movies")

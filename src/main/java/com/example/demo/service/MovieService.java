@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.MovieDTO;
-import com.example.demo.dto.MoviePrivateDTO;
+import com.example.demo.dto.Movie.MovieDTO;
+import com.example.demo.dto.Movie.MoviePrivateDTO;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.MovieRepository;

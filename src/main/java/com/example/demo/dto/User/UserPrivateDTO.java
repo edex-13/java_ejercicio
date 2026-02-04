@@ -1,7 +1,8 @@
-package com.example.demo.dto;
+package com.example.demo.dto.User;
 
 import java.util.List;
 
+import com.example.demo.dto.Movie.MoviePrivateDTO;
 import com.example.demo.model.Movie;
 
 import jakarta.validation.constraints.Email;
