@@ -44,7 +44,7 @@ public class UserService {
 
   }
 
-  public User create(String name , String email , int age , List<Movie> movies){
+  public User create(String name , String email , int age ){
 
     User user = new User(name, email, age);
     return this.userRepository.save(user);

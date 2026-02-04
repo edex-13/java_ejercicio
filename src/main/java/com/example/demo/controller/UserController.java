@@ -56,7 +56,7 @@ public class UserController {
   @PostMapping("/")
   public ResponseEntity<SuccessResponse<User>> createUser(@Valid @RequestBody UserDTO request){
 
-    User user = userService.create(request.name() , request.email() , request.edad() , request.movies());
+    User user = userService.create(request.name() , request.email() , request.edad());
 
     SuccessResponse<User> response = 
       new SuccessResponse<User>(HttpStatus.CREATED.value(), "usuario creado con exito", user);

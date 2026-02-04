@@ -26,8 +26,6 @@ public record UserDTO(
   
   @Positive
   @Max(100)
-  int edad ,
+  int edad 
 
-  @NotNull
-  List<Movie> movies
 ) {}

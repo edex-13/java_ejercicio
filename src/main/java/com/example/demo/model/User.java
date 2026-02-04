@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +19,17 @@ public class User {
   private String email;
 
   private int edad;
+
+
+  @ManyToMany
+  @JoinTable(
+    name = "usuarios_peliculas_favoritas",
+    joinColumns =  @JoinColumn(name = "usuario_id"),
+    inverseJoinColumns = @JoinColumn(name = "movie_id" )
+  )
+  private List<Movie> movies;
+
+  
 
   protected User() {
   }
@@ -55,4 +68,22 @@ public class User {
   public void setEdad(int edad) {
     this.edad = edad;
   }
+
+  public List<Movie> getMovies() {
+    return movies;
+  }
+
+  public void setMovies(List<Movie> movies) {
+    this.movies = movies;
+  }
+
+
+
+
+
+
+
+
+
+
 }
