@@ -68,6 +68,7 @@ public class MovieController {
     return new ResponseEntity<>(response , HttpStatus.CREATED);
   }
 
+
   @PutMapping("/{index}")
   public ResponseEntity<SuccessResponse<MovieDTO>> updateUser(@PathVariable Long index ,@Valid @RequestBody MovieDTO request){
 

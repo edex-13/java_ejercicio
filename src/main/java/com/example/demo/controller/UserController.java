@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.SuccessResponse;
 import com.example.demo.dto.SuccessResponseNotData;
 import com.example.demo.dto.UserDTO;
+import com.example.demo.dto.UserPrivateDTO;
 import com.example.demo.service.UserService;
 
 import jakarta.validation.Valid;
@@ -64,6 +65,21 @@ public class UserController {
 
     return new ResponseEntity<>(response , HttpStatus.CREATED);
   }
+
+
+  @PostMapping("/{user_id}/add_movie_to_favorite/{movie_id})")
+  public ResponseEntity<SuccessResponse<UserPrivateDTO >> add_movie_to_favorite(@PathVariable  Long user_id , @PathVariable Long movie_id  ){
+
+    UserPrivateDTO user = userService.add_movie_to_favorite(user_id , movie_id);
+    
+    SuccessResponse<UserPrivateDTO> response = 
+      new SuccessResponse<UserPrivateDTO>(HttpStatus.CREATED.value(), "usuario creado con exito", user);
+
+
+    return new ResponseEntity<>(response , HttpStatus.CREATED);
+
+  }
+
 
   @PutMapping("/{index}")
   public ResponseEntity<SuccessResponse<User>> updateUser(@PathVariable Long index ,@Valid @RequestBody UserDTO request){

@@ -3,20 +3,28 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties.Apiversion.Use;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.MoviePrivateDTO;
+import com.example.demo.dto.UserPrivateDTO;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
+import com.example.demo.repository.MovieRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.MovieRepository;
 import com.example.demo.model.Movie;
 
 @Service
 public class UserService {
 
  private final UserRepository userRepository;
+ private final MovieRepository movieRepository;
 
-  public UserService(UserRepository userRepository){
+  public UserService(UserRepository userRepository , MovieRepository movieRepository){
     this.userRepository = userRepository;
+    this.movieRepository = movieRepository;
     
  
   }
@@ -48,6 +56,40 @@ public class UserService {
 
     User user = new User(name, email, age);
     return this.userRepository.save(user);
+
+  }
+
+  public UserPrivateDTO add_movie_to_favorite(Long user_id , Long movie_id){
+
+
+    User user = userRepository.findById(user_id)
+      .orElseThrow(()->
+        new UserNotFoundException("Usuario con id " + user_id + " no encontrado")
+      );
+
+
+    Movie movie = movieRepository.findById(movie_id)
+      .orElseThrow(()->
+        new UserNotFoundException("Moview con id " + user_id + " no encontrado")
+      );
+
+    if (!user.getMovies().contains(movie)) {
+      user.getMovies().add(movie);
+      
+    }
+
+    User userActualizado = userRepository.save(user);
+
+
+    List<MoviePrivateDTO> moviePrivate = userActualizado.getMovies().stream()
+      .map(movie_v1 -> new MoviePrivateDTO(movie_v1.getId() , movie_v1.getNombre()  ,movie_v1.getDuracion()))
+      .toList();
+
+
+    UserPrivateDTO userResponse = new UserPrivateDTO(userActualizado.getName(), user.getEmail() , user.getEdad() , moviePrivate );
+
+    return userResponse;
+
 
   }
 
