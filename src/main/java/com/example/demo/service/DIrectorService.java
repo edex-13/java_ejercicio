@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.Director.DirectorCreateDTO;
 import com.example.demo.dto.Director.DirectorDTO;
 import com.example.demo.dto.Movie.MovieDTO;
 import com.example.demo.model.Director;
@@ -40,7 +41,7 @@ public class DIrectorService {
   } 
 
 
-  public DirectorDTO createDirector(DirectorDTO director){
+  public DirectorDTO createDirector(DirectorCreateDTO director){
     Director new_director = new Director(director.nombre());
     return new DirectorDTO(new_director.getName() , null);
   }

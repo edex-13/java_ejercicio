@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.SuccessResponse;
 import com.example.demo.dto.SuccessResponseNotData;
+import com.example.demo.dto.Director.DirectorCreateDTO;
+import com.example.demo.dto.Director.DirectorDTO;
 import com.example.demo.dto.Movie.MovieDTO;
 import com.example.demo.dto.Movie.MoviePrivateDTO;
 import com.example.demo.dto.User.UserDTO;
+import com.example.demo.service.DIrectorService;
 import com.example.demo.service.MovieService;
 
 import jakarta.validation.Valid;
@@ -26,68 +29,37 @@ import com.example.demo.model.Movie;
 import com.example.demo.model.User;
 
 @RestController
-@RequestMapping("/movies")
-public class MovieController {
+@RequestMapping("/dicrector")
+public class DirectorController {
   
-  private final  MovieService moviesService;
+  private final  DIrectorService directorService;
 
-  public MovieController(MovieService moviesService) {
-    this.moviesService = moviesService;
+  public DirectorController(DIrectorService directorService) {
+    this.directorService = directorService;
   }
 
   @GetMapping
-  public ResponseEntity<SuccessResponse<List<MoviePrivateDTO>>> getUsers()
+  public ResponseEntity<SuccessResponse<List<DirectorDTO>>> getUsers()
   {
-    List<MoviePrivateDTO> movies = moviesService.getMovies();
-    SuccessResponse<List<MoviePrivateDTO>> response = new SuccessResponse<>(HttpStatus.OK.value() ,  "Lista de usuarios obtenida con exito", movies);
+    List<DirectorDTO> director = directorService.GetDirectores();
+    SuccessResponse<List<DirectorDTO>> response = new SuccessResponse<>(HttpStatus.OK.value() ,  "Lista de usuarios obtenida con exito", director);
     return new ResponseEntity<>(response, HttpStatus.OK );
   }
 
 
-  @GetMapping("/{name}")
-  public ResponseEntity<SuccessResponse<MovieDTO>> getUser(@PathVariable String name)
-  {
-    MovieDTO movie = moviesService.getMovieByname(name);
 
-    SuccessResponse<MovieDTO> response = 
-      new SuccessResponse<>(HttpStatus.OK.value(), "usuario obtenido con exitor", movie);
-
-
-    return new ResponseEntity<>(response , HttpStatus.OK );
-  }
 
   @PostMapping("/")
-  public ResponseEntity<SuccessResponse<MovieDTO>> createUser(@Valid @RequestBody MovieDTO request){
+  public ResponseEntity<SuccessResponse<DirectorDTO>> createUser(@Valid @RequestBody DirectorCreateDTO request){
 
-    MovieDTO user = moviesService.create(request.nombre() , request.duracion());
+    DirectorDTO user = directorService.createDirector(request);
 
-    SuccessResponse<MovieDTO> response = 
-      new SuccessResponse<MovieDTO>(HttpStatus.CREATED.value(), "usuario creado con exito", user);
+    SuccessResponse<DirectorDTO> response = 
+      new SuccessResponse<DirectorDTO>(HttpStatus.CREATED.value(), "usuario creado con exito", user);
 
 
     return new ResponseEntity<>(response , HttpStatus.CREATED);
   }
 
-
-  @PutMapping("/{index}")
-  public ResponseEntity<SuccessResponse<MovieDTO>> updateUser(@PathVariable Long index ,@Valid @RequestBody MovieDTO request){
-
-    MovieDTO movie =  moviesService.update(index , request.nombre() , request.duracion()) ;
-
-    
-    SuccessResponse<MovieDTO> response = 
-      new SuccessResponse<MovieDTO>(HttpStatus.CREATED.value(), "usuario actualiado con exito", movie);
-   
-    return  new ResponseEntity<>(response , HttpStatus.OK);
-  }
-
-  @DeleteMapping("/{index}")
-  public ResponseEntity<SuccessResponseNotData> delateUser(@PathVariable Long id){
-    moviesService.delate(id);
-
-    SuccessResponseNotData response = 
-      new SuccessResponseNotData(HttpStatus.NO_CONTENT.value(), "usuario eliminado con exito");
-    return new ResponseEntity<>(response , HttpStatus.NO_CONTENT);
-
-  }
+  
 }
